@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Message You Needed to Hear</title>
+<style>
+  body{background:#000;color:#fff;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px;min-height:100vh}
+  .card{max-width:720px;width:100%;background:transparent;border:0}
+  textarea, input{width:100%;padding:14px;margin:8px 0;border:0;border-radius:6px;font-size:18px}
+  button{padding:12px 18px;font-size:18px;border-radius:6px;border:0;cursor:pointer}
+  .message{margin-top:28px;background:transparent;border:1px solid rgba(255,255,255,.08);padding:22px;border-radius:8px;min-height:120px;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1.35}
+  .hint{opacity:.6;font-size:13px;margin-top:12px}
+  .small{font-size:13px;opacity:.8;margin-top:10px}
+  .copy{margin-top:12px;background:transparent;border:1px dashed rgba(255,255,255,.08);padding:10px;border-radius:6px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1 style="font-size:28px;margin:0 0 10px 0">Message You Needed to Hear</h1>
+    <div class="hint">Type one short phrase about how you feel (one sentence). Then tap GET MESSAGE.</div>
+    <textarea id="input" rows="2" placeholder="e.g., I'm exhausted and stuck at my job" maxlength="140"></textarea>
+    <button id="go">GET MESSAGE</button>
+    <div class="message" id="output">Your private line will appear here.</div>
+    <div class="small">Screenshot the message. Share if it landed.</div>
+    <div class="copy" id="copy" style="display:none">
+      <button id="copyBtn">Copy message</button>
+    </div>
+  </div>
+
+<script>
+const templates = {
+  burnout: [
+    "You’re exhausted because you’ve carried too much for too long. Pause now.",
+    "Your body is whispering stop; listen before it screams.",
+    "Every silent effort is seen by someone who matters; trust the quiet.",
+    "Saying no isn’t rejection—it’s survival. Repeat it to yourself.",
+    "Your energy isn’t infinite; stop spending it on things that drain.",
+    "Rest isn’t optional; it’s proof you value yourself more than stress.",
+    "Overwhelm isn’t weakness; it’s your mind signaling recalibration.",
+    "You’ve done enough today. Repeat. Enough.",
+    "Pausing doesn’t erase progress; it preserves it."
+  ],
+  heartbreak: [
+    "You loved fully. Leaving them was courage, not failure.",
+    "Their absence won’t reduce your worth; it clarifies it.",
+    "Grief is evidence of love, not weakness.",
+    "Stop replaying them; start imagining the life without their shadow.",
+    "Pain is temporary; clarity is permanent.",
+    "They left, but your heart will outlast this.",
+    "Let the memory fade, but keep the lessons close.",
+    "Love lost made room for someone who deserves all of you.",
+    "Moving forward is not forgetting—it’s reclaiming your life."
+  ],
+  doubt: [
+    "Fear dresses as logic; act anyway.",
+    "You already know the right move; silence doubt and execute.",
+    "Waiting for certainty wastes what certainty cannot guarantee.",
+    "Hesitation is loud; your instinct is louder.",
+    "One bold choice for yourself outweighs ten for others.",
+    "Doubt is temporary; your next step is permanent.",
+    "Stop overthinking; small action teaches more than endless worry.",
+    "The voice of fear is persuasive; your truth is undeniable.",
+    "Pause, breathe, move. Hesitation isn’t a strategy."
+  ],
+  default: [
+    "You’re rebuilding quietly; the world hasn’t noticed yet.",
+    "Rest is not wasted time; it’s preparation disguised.",
+    "Stop explaining yourself; your peace matters more than approval.",
+    "Someone underestimates your patience—use it to your advantage.",
+    "Invisible progress is still progress; trust it.",
+    "Small victories accumulate into life-changing results.",
+    "Your worth isn’t measured by output; it’s measured by presence.",
+    "Consistency outlasts attention; keep moving silently.",
+    "You are allowed to outgrow what no longer serves you."
+  ]
+};
+
+function classify(text){
+  const t = text.toLowerCase();
+  if(/[tired|exhaust|burnout|work|overwhelm|overworked]/.test(t)) return 'burnout';
+  if(/[heart|love|break|ex|left|gone|relationship|cheat|lost]/.test(t)) return 'heartbreak';
+  if(/[doubt|scared|fear|anxious|worry|unsure]/.test(t)) return 'doubt';
+  return 'default';
+}
+
+function compose(text){
+  const cat = classify(text);
+  const pool = templates[cat] || templates['default'];
+  const pick = n => pool[Math.floor(Math.random()*pool.length)];
+  if(Math.random() < 0.6) return pick();
+  return pick() + " " + (pick());
+}
+
+function getOrderId(){
+  const p = new URLSearchParams(location.search);
+  return p.get('order') || p.get('order_id') || p.get('oid') || '';
+}
+
+document.getElementById('go').addEventListener('click', ()=>{
+  const text = document.getElementById('input').value.trim();
+  if(!text){ document.getElementById('output').textContent = "Type one short sentence about what’s weighing on you."; return; }
+  const msg = compose(text);
+  document.getElementById('output').textContent = msg;
+  document.getElementById('copy').style.display = 'block';
+  document.getElementById('copyBtn').onclick = () => {
+    navigator.clipboard.writeText(msg).then(()=>{ document.getElementById('copyBtn').textContent = 'Copied'; setTimeout(()=>document.getElementById('copyBtn').textContent='Copy message',900); });
+  };
+  console.log('order:', getOrderId());
+});
+
+window.addEventListener('load', ()=>{
+  const oid = getOrderId();
+  if(oid) console.log('Order ID:', oid);
+  document.getElementById('input').focus();
+});
+</script>
+</body>
+</html>
