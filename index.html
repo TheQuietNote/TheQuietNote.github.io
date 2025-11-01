@@ -1,84 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Quiet Note</title>
-<style>
-body {
-  margin:0;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg,#0a0a0a,#1a1a1a);
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-height:100vh;
-  text-align:center;
-  padding:20px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send It Anonymously 💌</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-h1 {
-  font-size:48px;
-  margin-bottom:10px;
-  color:#ffd700;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #c77dff, #8a4fff);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 30px;
+    }
 
-h2 {
-  font-size:22px;
-  margin-bottom:30px;
-  font-weight:normal;
-  color:#eee;
-}
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-p {
-  font-size:18px;
-  line-height:1.5;
-  max-width:600px;
-  margin:0 auto 30px auto;
-  color:#ccc;
-}
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
 
-button {
-  background: linear-gradient(90deg,#ff7a18,#af002d);
-  border:none;
-  padding:18px 36px;
-  font-size:20px;
-  color:#fff;
-  border-radius:12px;
-  cursor:pointer;
-  transition: all 0.3s ease;
-  font-weight:bold;
-  margin-bottom:20px;
-}
+    p {
+      max-width: 470px;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      color: rgba(255, 255, 255, 0.95);
+    }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255,122,24,0.6);
-}
+    a.button {
+      display: inline-block;
+      background: #ff2e91;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-size: 17px;
+      box-shadow: 0 4px 15px rgba(255, 46, 145, 0.5);
+      transition: all 0.3s ease;
+    }
 
-footer {
-  font-size:13px;
-  opacity:0.6;
-  margin-top:40px;
-}
-</style>
+    a.button:hover {
+      background: #ff1493;
+      box-shadow: 0 6px 25px rgba(255, 46, 145, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .note {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  </style>
 </head>
 <body>
 
-<h1>The Quiet Note</h1>
-<h2>Your private message, written just for you.</h2>
+  <h1>Say What You Couldn’t 💔</h1>
+  <p>
+    Some words burn to be spoken.  
+    A confession, a crush, a secret you never sent — this is your chance.  
+    Send it **anonymously**, safely, and completely private.  
+    <br><br>
+    If you don’t know what to write, instead of “your message,” describe the situation.
+  </p>
 
-<p>Feeling exhausted, heartbroken, or uncertain? Receive a personal, anonymous message that speaks to exactly what you’re going through. Only ₦1,000.</p>
+  <a href="https://paystack.shop/pay/lgoima496j" class="button">
+    Send Anonymously (₦1,000)
+  </a>
 
-<a href="https://paystack.shop/pay/lgoima496j">
-  <button>Get Your Private Message</button>
-</a>
+  <p class="note">You’ll be redirected to the form after payment.</p>
 
-<p>After payment, you’ll be redirected to a form to submit your preferred delivery method anonymously.</p>
-
-<footer>&copy; 2025 The Quiet Note. Messages sent anonymously.</footer>
+  <footer>💌 100% Anonymous. No names. No traces.</footer>
 
 </body>
 </html>
